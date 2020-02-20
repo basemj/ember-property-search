@@ -1,25 +1,25 @@
 <h2>
   Property types
 </h2>
-<ul>
-  <li>
-    <a href="">
-      All
-    </a>
+<ul class="nav flex-column">
+  <li class="nav-item">
+      <a
+        class="nav-link {{if allActive "disabled"}}"
+        href="#"
+        {{action "onChangeTypeSelection" "all"}}
+      >
+        All
+      </a>
   </li>
-  <li>
-    <a href="">
-      Flat
-    </a>
-  </li>
-  <li>
-    <a href="">
-      Terraced house
-    </a>
-  </li>
-  <li>
-    <a href="">
-      Semi-detached
-    </a>
-  </li>
+  {{#each propertyTypes as |propertyType|}}
+    <li class="nav-item">
+      <a
+        class="nav-link {{if propertyType.checked "disabled"}}"
+        href="#"
+        {{action "onChangeTypeSelection" propertyType}}
+      >
+        {{propertyType.label}}
+      </a>
+    </li>
+  {{/each}}
 </ul>

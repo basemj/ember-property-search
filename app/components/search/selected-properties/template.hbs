@@ -12,18 +12,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>sfjshgfsdfsdf sf</td>
-        <td>20095</td>
-        <td>5</td>
-        <td>63</td>
-      </tr>
-      <tr>
-        <td>12 uptjhothjtot</td>
-        <td>22299</td>
-        <td>3</td>
-        <td>22</td>
-      </tr>
+      {{#each properties as |property|}}
+        <tr>
+          <td>{{property.address}}</td>
+          <td>{{property.postcode}}</td>
+          <td>{{property.numberOfRooms}}</td>
+          <td>{{property.floorArea}}</td>
+        </tr>
+      {{/each}}
     </tbody>
   </table>
 </div>

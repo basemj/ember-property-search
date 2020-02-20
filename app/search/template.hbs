@@ -1,2 +1,5 @@
 {{page-header}}
-{{search/route-template}}
+{{search/route-template
+  onChangePropertySelection=(route-action "updatePropertySelection")
+  onChangeTypeSelection=(route-action "updatePropertyTypesSelection")
+}}
