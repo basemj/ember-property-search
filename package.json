@@ -2,7 +2,7 @@
   "name": "ember-property-search",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for ember-property-search goes here",
+  "description": "A property search application built using ember",
   "repository": "",
   "license": "MIT",
   "author": "",
