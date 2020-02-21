@@ -2,25 +2,27 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { set } from '@ember/object';
 
-module('Integration | Component | search/search-results', function(hooks) {
+module('Integration | Component | search/search-results', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it renders', async function (assert) {
+    set(this, 'properties', [
+      {
+        id: '1',
+        address: 'an address',
+        postcode: 'PO57',
+        numberOfRooms: 5,
+        propertyType: 'Flat',
+        floorArea: 120
+      }
+    ]);
+    await render(hbs`{{search/search-results properties=properties}}`);
 
-    await render(hbs`{{search/search-results}}`);
+    const table = this.element.querySelector('table');
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#search/search-results}}
-        template block text
-      {{/search/search-results}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.ok(table, 'it generates a table');
+    assert.ok(table.rows.length > 1, 'it generates at least one table record');
   });
 });
