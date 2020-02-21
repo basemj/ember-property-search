@@ -10,6 +10,7 @@ export default Component.extend({
   properties: [],
   propertyTypes: [],
   searchQuery: '',
+  errorMessage: '',
 
   init() {
     this._super();
@@ -47,12 +48,19 @@ export default Component.extend({
     const type = propertyTypes.find((type) => type.checked === true);
 
     if (address && !loading) {
+      set(this, 'errorMessage', '');
       set(this, 'loading', true);
       this.propertyData.fetchPropertyList(address, type && type.value)
         .then((response) => {
           const properties = response.properties;
           set(this, 'properties', properties);
           set(this, 'loading', false);
+        })
+        .catch((error) => {
+          set(this, 'properties', []);
+          set(this, 'loading', false);
+          set(this, 'errorMessage', 'oops! Something went wrong. Please try again.');
+          throw error;
         });
     }
   },
