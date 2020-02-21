@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import {get, set, computed, observer} from '@ember/object';
+import {get, set, computed} from '@ember/object';
 import {inject} from '@ember/service';
 
 export default Component.extend({
@@ -8,7 +8,14 @@ export default Component.extend({
 
   loading: false,
   properties: [],
+  propertyTypes: [],
   searchQuery: '',
+
+  init() {
+    this._super();
+    const propertyTypes = this.store.peekAll('propertyType');
+    set(this, 'propertyTypes', propertyTypes);
+  },
 
   computedPropertyList: computed(
     'properties.[]',
@@ -26,9 +33,6 @@ export default Component.extend({
       });
     }
   ),
-  propertyTypes: computed(function () {
-    return this.store.peekAll('propertyType');
-  }),
   selectedProperties: computed(
     'selectedProperties.@each.checked',
     function () {
@@ -36,30 +40,28 @@ export default Component.extend({
     }
   ),
 
-  searchProperties: observer(
-    'propertyTypes.@each.checked',
-    'searchQuery',
-    function () {
-      const address = get(this, 'searchQuery');
-      const type = get(this, 'propertyTypes')
-        .find((type) => type.checked);
+  fetchNewData() {
+    const address = get(this, 'searchQuery');
+    const loading = get(this, 'loading');
+    const propertyTypes = this.store.peekAll('propertyType');
+    const type = propertyTypes.find((type) => type.checked === true);
 
-      if (address) {
-        set(this, 'loading', true);
-        this.propertyData.fetchPropertyList(address, type && type.value)
-          .then((response) => {
-            const properties = response.properties;
-            set(this, 'properties', properties);
-            set(this, 'loading', false);
-          });
-      }
+    if (address && !loading) {
+      set(this, 'loading', true);
+      this.propertyData.fetchPropertyList(address, type && type.value)
+        .then((response) => {
+          const properties = response.properties;
+          set(this, 'properties', properties);
+          set(this, 'loading', false);
+        });
     }
-  ),
+  },
 
   actions: {
     performSearch(e) {
       const address = get(e, 'target.elements.propertySearchBox.value');
       set(this, 'searchQuery', address);
+      this.fetchNewData();
     },
     onChangePropertySelection(property, e) {
       const onChangePropertySelection = get(this, 'onChangePropertySelection');
@@ -72,6 +74,7 @@ export default Component.extend({
       if (onChangeTypeSelection) {
         onChangeTypeSelection(propertyType);
       }
+      this.fetchNewData();
     }
-  }
+  },
 });
