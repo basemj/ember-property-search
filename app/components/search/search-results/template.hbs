@@ -7,7 +7,9 @@
       <table class="table table-hover">
         <thead class="thead-light">
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">
+              <span class="sr-only">selected</span>
+            </th>
             <th scope="col">Address</th>
             <th scope="col">Postcode</th>
             <th scope="col">Property type</th>
@@ -26,10 +28,11 @@
                   checked={{property.checked}}
                   onchange={{action "onChangePropertySelection" property}}
                 >
+                <label for={{property.id}} class="sr-only">
+                  select {{property.address}}
+                </label>
               </td>
-              <td>
-                <label for={{property.id}}>{{property.address}}</label>
-              </td>
+              <td>{{property.address}}</td>
               <td>{{property.postcode}}</td>
               <td>{{property.propertyType}}</td>
               <td>{{property.numberOfRooms}}</td>

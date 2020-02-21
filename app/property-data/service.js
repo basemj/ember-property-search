@@ -38,14 +38,14 @@ export default Service.extend({
     }
   },
 
-  updatePropertyTypesSelection(value) {
+  updatePropertyTypesSelection(val) {
     const currentPropertyTypes = this.store.peekAll('propertyType');
-    const propertyTypes = currentPropertyTypes.map((type) => {
+    const propertyTypes = currentPropertyTypes.map(({id, label, value}) => {
       return {
-        id: type.id,
-        label: type.label,
-        value: type.value,
-        checked: type.value === value
+        id,
+        label,
+        value,
+        checked: value === val
       };
     });
 
