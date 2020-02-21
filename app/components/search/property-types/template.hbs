@@ -3,12 +3,12 @@
 </h2>
 <ul id="property-types-list">
   <li>
-      <button
-        class="btn btn-link {{if allActive "active"}}"
-        {{action "onChangeTypeSelection" "all"}}
-      >
-        All
-      </button>
+    <button
+      class="btn btn-link {{if allActive "active"}}"
+      {{action "onChangeTypeSelection" "all"}}
+    >
+      All
+    </button>
   </li>
   {{#each propertyTypes as |propertyType|}}
     <li>
