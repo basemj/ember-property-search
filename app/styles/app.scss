@@ -1,3 +1,95 @@
-
 @import "ember-bootstrap/bootstrap";
-@import "../search/styles.scss";
+
+$grey-primary: #f4f4f9;
+$grey-secondary: #e5e5e5;
+$grey-tertiary: #a9a7af;
+
+$yellow-primary: #ffdb44;
+$yellow-secondary: #e8c42b;
+
+.h5 {
+  margin: 1em 0 1em;
+}
+
+header {
+  background-color: $grey-primary;
+  margin-bottom: 20px;
+
+  h1 {
+    margin-top: 30px;
+  }
+
+  #logo {
+    width: 70px;
+    float: left;
+    margin-top: 15px;
+    margin-right: 5px;
+    margin-bottom: -10px;
+
+    @include media-breakpoint-up(md) {
+      width: 110px;
+      margin-bottom: -30px;
+    }
+  }
+
+}
+
+form {
+  margin-top: -0.5em;
+
+  .btn-warning {
+    background: linear-gradient(0deg, $yellow-secondary 0%, $yellow-primary 100%);
+    border-color: $yellow-secondary;
+    box-shadow: 5px 5px 10px -3px rgba(0,0,0,0.18);
+  }
+}
+
+.table-responsive {
+  background-color: $grey-primary;
+
+  &.selected-table {
+    min-height: 160px;
+  }
+
+  &.results-table {
+    min-height: 310px;
+  }
+
+  thead {
+    th {
+      background-color: $grey-secondary;
+      border-left: 1px solid #fff;
+      border-right: 1px solid #fff;
+      border-bottom: 1px solid $grey-tertiary;
+    }
+  }
+
+  td {
+    border-top: 0;
+    border-bottom: 1px solid $grey-tertiary;
+    padding: 0.5rem;
+  }
+}
+
+.results-void {
+  padding: 20px;
+  text-align: center;
+  background-color: $grey-primary;
+  min-height: 310px;
+}
+
+#property-types-list {
+  background-color: $grey-primary;
+  list-style-type: none;
+  padding: 5px 0;
+
+  button {
+    line-height: 1em;
+    color: #000;
+
+    &.active {
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+}

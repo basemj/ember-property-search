@@ -1,25 +1,23 @@
-<h2>
+<h2 class="h5 font-weight-bold">
   Property types
 </h2>
-<ul class="nav flex-column">
-  <li class="nav-item">
-      <a
-        class="nav-link {{if allActive "disabled"}}"
-        href="#"
+<ul id="property-types-list">
+  <li>
+      <button
+        class="btn btn-link {{if allActive "active"}}"
         {{action "onChangeTypeSelection" "all"}}
       >
         All
-      </a>
+      </button>
   </li>
   {{#each propertyTypes as |propertyType|}}
-    <li class="nav-item">
-      <a
-        class="nav-link {{if propertyType.checked "disabled"}}"
-        href="#"
+    <li>
+      <button
+        class="btn btn-link {{if propertyType.checked "active"}}"
         {{action "onChangeTypeSelection" propertyType}}
       >
         {{propertyType.label}}
-      </a>
+      </button>
     </li>
   {{/each}}
 </ul>
